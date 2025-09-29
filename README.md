@@ -2,13 +2,11 @@
 
 A clean, fast, and user-friendly web application for searching and discovering books.
 
-![App Demo](https://surya4785.github.io/Books-Searching-App/)
-
 ---
 
 ## ✒️ About The Project
 
-This project was built to provide a simple and elegant interface for users to find information about books. Whether you're a student looking for a textbook, a reader searching for a new novel, or just curious about a title, [Your Project Name] helps you get details quickly. It leverages the [Google Books API / Open Library API] to fetch a vast amount of data and presents it in a clean, modern UI.
+This project was built to provide a simple and elegant interface for users to find information about books. Whether you're a student looking for a textbook, a reader searching for a new novel, or just curious about a title, [Books-Searching-App] helps you get details quickly. It leverages the [Google Books API / Open Library API] to fetch a vast amount of data and presents it in a clean, modern UI.
 
 ---
 
