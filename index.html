@@ -1,23 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚 Book Finder & Library</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 Book Finder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <header>
-        <h1>📚 Book Finder</h1>
-        <div class="header-buttons">
-            <button id="homeBtn">🏡 Home</button>
-            <button id="libraryBtn">💖 My Library</button>
-            <button id="themeToggle">🌙</button>
+<body
+  class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+  <header class="bg-indigo-600 dark:bg-indigo-800 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl md:text-3xl font-bold tracking-tight">📚 Book Finder</h1>
+      <button id="darkModeToggle"
+        class="p-2 rounded-full hover:bg-indigo-700 dark:hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-white transition-colors">
+        <svg id="moonIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+        <svg id="sunIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-4 md:p-6">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-8">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input type="text" id="searchInput" placeholder="Search by title, author, ISBN..."
+          class="flex-grow p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <select id="sortOrder"
+          class="p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="relevance">Relevance</option>
+          <option value="newest">Newest</option>
+        </select>
+        <button id="searchButton"
+          class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">Search</button>
+        <button id="clearButton"
+          class="bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 font-bold py-3 px-6 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800">Clear</button>
+      </div>
+    </div>
+
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 border-b-2 border-indigo-500 pb-2">Search Results</h2>
+      <div id="resultsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      </div>
+      <div id="statusMessage" class="text-center text-gray-500 dark:text-gray-400 mt-8 text-lg">
+        Start by searching for a book.
+      </div>
+      <div class="text-center mt-8">
+        <button id="loadMoreBtn"
+          class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-md hover:bg-indigo-700 transition-colors hidden focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">Load
+          More</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <h2 class="text-3xl font-bold border-b-2 border-green-500 pb-2">My Favorites</h2>
+        <div>
+          <button id="downloadFavoritesBtn"
+            class="bg-green-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 mr-2">Download
+            JSON</button>
+          <button id="clearFavoritesBtn"
+            class="bg-red-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">Clear
+            All</button>
         </div>
-    </header>
-    <script src="script.js"></script>
+      </div>
+      <div id="favoritesGrid"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      </div>
+      <div id="favoritesPlaceholder" class="text-center text-gray-500 dark:text-gray-400 mt-8 text-lg hidden">
+        You have no favorite books yet.
+      </div>
+    </section>
+  </main>
+
+  <div id="bookModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+    <div id="modalContent"
+      class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 
 </html>
